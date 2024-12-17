@@ -72,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
             var newAvailableQuantity = product.getAvailableQuantity() - productRequest.quantity();
             product.setAvailableQuantity(newAvailableQuantity);
             productRepository.save(product);
-            purchaseProducts.add(productMapper.toProductPurchaseResponse(product, productRequest.quantity()));
+            purchaseProducts.add(productMapper.toproductPurchaseResponse(product, productRequest.quantity()));
         }
 
         return purchaseProducts;

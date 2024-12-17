@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import java.math.BigDecimal;
 
-@Data
 public record ProductRequest(
         Integer id,
         @NotNull(message = "Product name is required")

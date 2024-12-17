@@ -5,7 +5,6 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 
-@Builder
 public record ProductResponse(
          Integer id,
          String name,

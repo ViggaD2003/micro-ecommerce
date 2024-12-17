@@ -5,7 +5,6 @@ import com.viggad.ecommerce.dto.response.ProductPurchaseResponse;
 import com.viggad.ecommerce.dto.response.ProductResponse;
 import com.viggad.ecommerce.model.Category;
 import com.viggad.ecommerce.model.Product;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,25 +23,25 @@ public class ProductMapper {
     }
 
     public ProductResponse toProductResponse(Product product) {
-        return ProductResponse.builder()
-                .id(product.getId())
-                .name(product.getName())
-                .description(product.getDescription())
-                .price(product.getPrice())
-                .availableQuantity(product.getAvailableQuantity())
-                .categoryId(product.getCategory().getId())
-                .categoryName(product.getCategory().getName())
-                .categoryDescription(product.getCategory().getDescription())
-                .build();
+        return new ProductResponse(
+                product.getId(),
+                product.getName(),
+                product.getDescription(),
+                product.getAvailableQuantity(),
+                product.getPrice(),
+                product.getCategory().getId(),
+                product.getCategory().getName(),
+                product.getCategory().getDescription()
+        );
     }
 
-    public ProductPurchaseResponse toProductPurchaseResponse(Product product, @NotNull(message = "Quantity is mandatory") Double quantity) {
-return ProductPurchaseResponse.builder()
-        .productId(product.getId())
-        .name(product.getName())
-        .description(product.getDescription())
-        .price(product.getPrice())
-        .quantity(quantity)
-        .build();
+    public ProductPurchaseResponse toproductPurchaseResponse(Product product, double quantity) {
+        return new ProductPurchaseResponse(
+                product.getId(),
+                product.getName(),
+                product.getDescription(),
+                product.getPrice(),
+                quantity
+        );
     }
 }

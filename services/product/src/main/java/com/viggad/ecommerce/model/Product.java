@@ -2,7 +2,11 @@ package com.viggad.ecommerce.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 
