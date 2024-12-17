@@ -10,7 +10,6 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 
-@Email
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

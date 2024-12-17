@@ -12,6 +12,7 @@ import com.viggad.ecommerce.service.inte.ProductService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -46,6 +47,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional(rollbackFor = ProductPurchaseException.class)
     public List<ProductPurchaseResponse> purchaseProducts(List<ProductPurchaseRequest> requestList) {
         var productIds = requestList
                 .stream()

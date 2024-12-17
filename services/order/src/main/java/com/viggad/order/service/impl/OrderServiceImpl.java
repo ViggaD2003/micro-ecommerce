@@ -47,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
 
         //purchase the products --> product-ms (RestTemplate)
 
-        var purchaseProducts = this.productClient.purchaseProduct(orderRequest.products());
+        var purchaseProducts = this.productClient.purchaseProducts(orderRequest.products());
         var order = this.orderRepository.save(mapper.toOrder(orderRequest));
 
         for(PurchaseRequest purchaseRequest : orderRequest.products()){

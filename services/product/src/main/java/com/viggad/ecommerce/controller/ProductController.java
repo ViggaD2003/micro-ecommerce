@@ -16,11 +16,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class ProductController {
 
-    @Autowired
-    private  ProductService productService;
+    private final ProductService productService;
 
     @PostMapping
     public ResponseEntity<Integer> createProduct(

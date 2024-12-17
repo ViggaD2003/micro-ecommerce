@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomerController {
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     @PostMapping
     public ResponseEntity<String> createCustomer(
