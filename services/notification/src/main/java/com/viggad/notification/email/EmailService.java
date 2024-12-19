@@ -22,7 +22,7 @@ import java.util.Map;
 @Slf4j
 public class EmailService {
 
-    private JavaMailSender mailSender;
+    private final JavaMailSender mailSender;
     private final SpringTemplateEngine templateEngine;
 
     @Async
@@ -46,6 +46,7 @@ public class EmailService {
             String htmlTemplate = templateEngine.process(templateName, context);
             mimeMessageHelper.setText(htmlTemplate, true);
             mimeMessageHelper.setTo(destinationEmail);
+            mailSender.send(mimeMessage);
             log.info(String.format("INFO - Email successfully sent to %s with template %s,", destinationEmail, templateName));
         } catch (MessagingException e) {
             log.warn("WARNING - Cannot send email to {}", destinationEmail);
@@ -75,6 +76,7 @@ public class EmailService {
             String htmlTemplate = templateEngine.process(templateName, context);
             mimeMessageHelper.setText(htmlTemplate, true);
             mimeMessageHelper.setTo(destinationEmail);
+            mailSender.send(mimeMessage);
             log.info(String.format("INFO - Email successfully sent to %s with template %s,", destinationEmail, templateName));
         } catch (MessagingException e) {
             log.warn("WARNING - Cannot send email to {}", destinationEmail);

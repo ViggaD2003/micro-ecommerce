@@ -17,10 +17,14 @@ public class OrderProducer {
 
 
     public void sendOrderConfirmation(OrderConfirmation orderConfirmation) {
-        log.info("sending order confirmation");
+        log.info("Sending order confirmation: {}", orderConfirmation);
+
         Message<OrderConfirmation> message = MessageBuilder.withPayload(orderConfirmation)
-                .setHeader(KafkaHeaders.TOPIC, "order-topic").build();
+                .setHeader(KafkaHeaders.TOPIC, "order-topic")
+//                .setHeader("__TypeId__", "orderConfirmation") // Thêm header này
+                .build();
 
         kafkaTemplate.send(message);
     }
+
 }

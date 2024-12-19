@@ -20,7 +20,7 @@ public class NotificationProducer {
     public void sendNotification(PaymentNotificationRequest request) {
         log.info("Sending notification request: <{}>", request);
         Message<PaymentNotificationRequest> message = MessageBuilder.withPayload(request)
-                .setHeader(KafkaHeaders.TOPIC, "payment-toic")
+                .setHeader(KafkaHeaders.TOPIC, "payment-topic")
                 .build();
 
         kafkaTemplate.send(message);

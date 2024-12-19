@@ -9,7 +9,9 @@ import com.viggad.notification.notification.NotificationType;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,13 +19,14 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@EnableKafka
 public class NotificationConsumer {
      private final NotificationRepository notificationRepository;
 
      private final EmailService emailService;
 
     @KafkaListener(topics = "payment-topic", groupId = "paymentGroup")
-    public void consumePaymentSuccessNotification(PaymentConfirmation paymentConfirmation) throws MessagingException {
+    public void consumePaymentSuccessNotification(@Payload PaymentConfirmation paymentConfirmation) throws MessagingException {
         log.info(String.format("Consuming the message from payment-topic Topic:: %s", paymentConfirmation));
 
         notificationRepository.save(
@@ -44,7 +47,7 @@ public class NotificationConsumer {
     }
 
     @KafkaListener(topics = "order-topic", groupId = "orderGroup")
-    public void consumeOrderSuccessNotification(OrderConfirmation orderConfirmation) throws MessagingException {
+    public void consumeOrderSuccessNotification(@Payload OrderConfirmation orderConfirmation) throws MessagingException {
         log.info(String.format("Consuming the message from order-topic Topic:: %s", orderConfirmation));
 
         notificationRepository.save(
